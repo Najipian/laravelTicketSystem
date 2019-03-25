@@ -4,6 +4,8 @@ Ticket System is a customer help ticket system built with laravel. Its designed 
 
 ## Architecture 
 
+Please have a look at the system erd-diagram.png ,to get an over view look about the its logic.
+
 #### users
 
 - users table contains all the system users and all of them are considered tenant users.
@@ -32,9 +34,10 @@ Ticket System is a customer help ticket system built with laravel. Its designed 
 
 clone this repository in your web server directory , and run the following commands on that directory :
 - composer update
-- php artisan migrate
-- php artisan db:seed
-- php artisan passport:install
+- php artisan migrate ( Create database )
+- php artisan db:seed ( Init database )
+- php artisan passport:install ( For API authentication )
+- php artisan queue:work --timeout=30 ( For queuing emails )
 
 ## APIs 
 

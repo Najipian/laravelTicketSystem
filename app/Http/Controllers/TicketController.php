@@ -61,7 +61,7 @@ class TicketController extends Controller
         if($ticket->save()) {
 
             Mail::to($ticket->property->landlord->user , 'EMAILS_SUBJECT')
-                ->send(new TicketCreated($ticket));
+                ->queue(new TicketCreated($ticket));
 
             return redirect('/tenant/ticket')->with([
                 'message_success' => "Ticket created successfully"
@@ -130,7 +130,7 @@ class TicketController extends Controller
         $to = $comment->direction == FROM_TENANT_TO_LANDLORD ? $ticket->assigned_landlord->user : $ticket->tenant;
 
         Mail::to($to , 'EMAILS_SUBJECT')
-            ->send(new TickedUpdated($comment , $type));
+            ->queue(new TickedUpdated($comment , $type));
 
         return redirect()->back();
     }
@@ -167,7 +167,7 @@ class TicketController extends Controller
             ];
 
             Mail::to($ticket->tenant , 'EMAILS_SUBJECT')
-                ->send(new TickedStatus($ticket));
+                ->queue(new TickedStatus($ticket));
         }
 
         return redirect('/landlord/ticket/' . $ticket->id)->with($output);
