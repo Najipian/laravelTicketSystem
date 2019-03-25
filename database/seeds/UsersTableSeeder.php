@@ -13,8 +13,9 @@ class UsersTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         //
-        for($i = 0 ; $i < 16 ; $i++){
+        for($i = 1 ; $i < 16 ; $i++){
             DB::table('users')->insert([
+                'id' => $i,
                 'name' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make('password'),
